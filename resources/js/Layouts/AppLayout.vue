@@ -1,4 +1,5 @@
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue'
 import {
   Dialog,
@@ -24,7 +25,7 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
+  { name: 'Dashboard', href: route('dashboard'), icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
@@ -32,9 +33,9 @@ const navigation = [
   { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
+  { name: 'Your Profile', href: route('profile.edit') },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Sign out', href: route('logout'), method: 'POST' },
 ]
 
 const sidebarOpen = ref(false)
@@ -61,13 +62,14 @@ const sidebarOpen = ref(false)
               </TransitionChild>
               <div class="flex flex-shrink-0 items-center px-4">
                 <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300" alt="Your Company" />
+                <span class="text-white font-bold text-lg pl-8">RENTdee</span>
               </div>
               <div class="mt-5 h-0 flex-1 overflow-y-auto">
                 <nav class="space-y-1 px-2">
-                  <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
+                  <Link v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
                     <component :is="item.icon" class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300" aria-hidden="true" />
                     {{ item.name }}
-                  </a>
+                  </Link>
                 </nav>
               </div>
             </DialogPanel>
@@ -85,13 +87,14 @@ const sidebarOpen = ref(false)
       <div class="flex flex-grow flex-col overflow-y-auto bg-indigo-700 pt-5">
         <div class="flex flex-shrink-0 items-center px-4">
           <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300" alt="Your Company" />
+          <span class="text-white font-bold text-lg pl-8">RENTdee</span>
         </div>
         <div class="mt-5 flex flex-1 flex-col">
           <nav class="flex-1 space-y-1 px-2 pb-4">
-            <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
+            <Link v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
               <component :is="item.icon" class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300" aria-hidden="true" />
               {{ item.name }}
-            </a>
+            </Link>
           </nav>
         </div>
       </div>
@@ -131,7 +134,7 @@ const sidebarOpen = ref(false)
               <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                 <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                    <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>
+                    <Link :href="item.href" :method="item.method" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</Link>
                   </MenuItem>
                 </MenuItems>
               </transition>
@@ -142,17 +145,17 @@ const sidebarOpen = ref(false)
 
       <main>
         <div class="py-6">
+          <slot />
+          <!--
           <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
             <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
           </div>
           <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-            <!-- Replace with your content -->
             <div class="py-4">
               <div class="h-96 rounded-lg border-4 border-dashed border-gray-200" />
             </div>
-            <slot />
-            <!-- /End replace -->
           </div>
+          -->
         </div>
       </main>
     </div>

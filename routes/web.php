@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TenantReportController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,3 +38,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Tenant Reports
+Route::get('/tenant-reports/create', [TenantReportController::class, 'create'])->name('tenantReports.create');
+Route::post('/tenant-reports', [TenantReportController::class, 'store'])->name('tenantReports.store');

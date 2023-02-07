@@ -95,6 +95,9 @@ const sidebarOpen = ref(false)
               <component :is="item.icon" class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300" aria-hidden="true" />
               {{ item.name }}
             </Link>
+            <div class="pt-8">
+              <Link :href="route('tenantReports.create')" class="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create Report</Link>
+            </div>
           </nav>
         </div>
       </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTenantReportRequest;
 use App\Models\TenantReport;
+use App\Models\Country;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class TenantReportController extends Controller
     {
         return Inertia::render('TenantReport/Create', [
             'data' => [
-
+                'countries' => Country::all(),
             ],
         ]);
     }

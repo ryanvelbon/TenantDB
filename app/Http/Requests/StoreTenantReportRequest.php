@@ -38,6 +38,10 @@ class StoreTenantReportRequest extends FormRequest
                 'max:20',
                 'required',
             ],
+            'nationality' => [
+                'required',
+                'integer',
+            ],
             'passport' => [
                 'string',
                 'min:5',

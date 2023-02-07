@@ -37,6 +37,7 @@ class TenantReport extends Model
         'last_name',
         'email',
         'phone',
+        'nationality',
         'passport',
         'id_card',
         'dob',
@@ -49,6 +50,11 @@ class TenantReport extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function nationality()
+    {
+        return $this->belongsTo(Country::class, 'nationality');
+    }
 
     public function getDobAttribute($value)
     {

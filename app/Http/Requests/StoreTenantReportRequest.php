@@ -61,8 +61,8 @@ class StoreTenantReportRequest extends FormRequest
             'n_months' => [
                 'required',
                 'integer',
-                'min:-2147483648',
-                'max:2147483647',
+                'min:1',
+                'max:60',
             ],
             'lease_broken' => [
                 'required',

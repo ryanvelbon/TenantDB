@@ -45,7 +45,7 @@ class TenantReport extends Model
         'lease_broken',
         'outstanding_rent',
         'property_damaged',
-        'created_by_id',
+        'created_by',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -66,9 +66,9 @@ class TenantReport extends Model
         $this->attributes['dob'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function created_by()
+    public function author()
     {
-        return $this->belongsTo(User::class, 'created_by_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     protected function serializeDate(DateTimeInterface $date)

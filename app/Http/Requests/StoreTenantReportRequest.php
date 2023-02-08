@@ -17,13 +17,13 @@ class StoreTenantReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => [
+            'firstName' => [
                 'string',
                 'min:1',
                 'max:50',
                 'required',
             ],
-            'last_name' => [
+            'lastName' => [
                 'string',
                 'min:1',
                 'max:50',
@@ -58,19 +58,19 @@ class StoreTenantReportRequest extends FormRequest
                 'required',
                 'date_format:' . config('panel.date_format'),
             ],
-            'n_months' => [
+            'nMonths' => [
                 'required',
                 'integer',
                 'min:1',
                 'max:60',
             ],
-            'lease_broken' => [
+            'leaseBroken' => [
                 'required',
             ],
-            'outstanding_rent' => [
+            'outstandingRent' => [
                 'required',
             ],
-            'property_damaged' => [
+            'propertyDamaged' => [
                 'required',
             ],
         ];

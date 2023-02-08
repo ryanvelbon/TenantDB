@@ -124,6 +124,18 @@ const submit = () => {
           </div>
 
           <div>
+            <InputLabel for="idCard" value="National ID" />
+            <TextInput
+              id="idCard"
+              type="text"
+              v-model="form.idCard"
+              class="mt-1 block"
+              required
+            />
+            <InputError class="mt-2" :message="form.errors.idCard" />
+          </div>
+
+          <div>
             <InputLabel for="dob" value="Date of Birth" />
             <TextInput
               id="dob"
@@ -141,21 +153,35 @@ const submit = () => {
 
         <div>
           <InputLabel for="nMonths" value="n months" />
+          <TextInput id="nMonths" type="number" v-model="form.nMonths" required />
           <InputError class="mt-2" :message="form.errors.nMonths" />
         </div>
 
         <div>
           <InputLabel for="leaseBroken" value="lease broken" />
+          <div>
+            <input id="leaseBrokenY" name="leaseBroken" type="radio" v-model="form.leaseBroken" value="1">
+            <label for="leaseBrokenY">yes</label>
+            <input id="leaseBrokenN" name="leaseBroken" type="radio" v-model="form.leaseBroken" value="0">
+            <label for="leaseBrokenN">no</label>
+          </div>
           <InputError class="mt-2" :message="form.errors.leaseBroken" />
         </div>
 
         <div>
           <InputLabel for="outstandingRent" value="outstanding rent" />
+          <TextInput id="outstandingRent" type="number" v-model="form.outstandingRent" required />
           <InputError class="mt-2" :message="form.errors.outstandingRent" />
         </div>
 
         <div>
           <InputLabel for="propertyDamaged" value="property damaged" />
+          <div>
+            <input id="propertyDamagedY" name="propertyDamaged" type="radio" v-model="form.propertyDamaged" value="1">
+            <label for="propertyDamagedY">yes</label>
+            <input id="propertyDamagedN" name="propertyDamaged" type="radio" v-model="form.propertyDamaged" value="0">
+            <label for="propertyDamagedN">no</label>
+          </div>
           <InputError class="mt-2" :message="form.errors.propertyDamaged" />
         </div>
 

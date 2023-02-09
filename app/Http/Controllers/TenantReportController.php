@@ -9,11 +9,24 @@ use App\Models\Country;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Inertia\Inertia;
 
 class TenantReportController extends Controller
 {
+    public function index()
+    {
+        // $reports = TenantReport::where('created_by', Auth::id())->get();
+        $reports = Auth::user()->reports;
+
+        return Inertia::render('TenantReport/Index', [
+            'data' => [
+                'reports' => $reports,
+            ],
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render('TenantReport/Create', [

@@ -14,23 +14,16 @@ import {
 import {
   Bars3BottomLeftIcon,
   BellIcon,
-  CalendarIcon,
   ChartBarIcon,
-  FolderIcon,
+  DocumentIcon,
   HomeIcon,
-  InboxIcon,
-  UsersIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 
 const navigation = [
   { name: 'Dashboard', href: route('dashboard'), icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  { name: 'Reports', href: route('tenantReports.index'), icon: DocumentIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: route('profile.edit') },

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TenantReportController;
+use App\Http\Controllers\Frontend\ProfileController;
+use App\Http\Controllers\Frontend\TenantReportController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,20 +27,25 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
 require __DIR__.'/auth.php';
 
-// Tenant Reports
-Route::get('/tenant-reports/search', [TenantReportController::class, 'searchPage'])->name('tenantReports.searchPage');
-Route::get('/tenant-reports/create', [TenantReportController::class, 'create'])->name('tenantReports.create');
-Route::post('/tenant-reports', [TenantReportController::class, 'store'])->name('tenantReports.store');
-Route::get('/tenant-reports', [TenantReportController::class, 'index'])->name('tenantReports.index');
+Route::group(['as' => 'frontend.', 'namespace' => 'Frontend'], function () {
+
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return Inertia::render('Frontend/Dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
+    // Profile
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    // Tenant Reports
+    Route::get('/tenant-reports/search', [TenantReportController::class, 'searchPage'])->name('tenantReports.searchPage');
+    Route::get('/tenant-reports/create', [TenantReportController::class, 'create'])->name('tenantReports.create');
+    Route::post('/tenant-reports', [TenantReportController::class, 'store'])->name('tenantReports.store');
+    Route::get('/tenant-reports', [TenantReportController::class, 'index'])->name('tenantReports.index');
+});

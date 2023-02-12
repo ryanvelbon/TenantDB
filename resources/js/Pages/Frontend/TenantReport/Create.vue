@@ -35,7 +35,7 @@ const form = useForm({
 })
 
 const submit = () => {
-  form.post(route('tenantReports.store'), {
+  form.post(route('frontend.tenantReports.store'), {
     onFinish: () => console.log("data submitted"),
   })
 }

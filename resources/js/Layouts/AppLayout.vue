@@ -23,12 +23,12 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 
 const navigation = [
-  { name: 'Dashboard', href: route('dashboard'), icon: HomeIcon, current: true },
-  { name: 'Reports', href: route('tenantReports.index'), icon: DocumentIcon, current: false },
-  { name: 'Search', href: route('tenantReports.searchPage'), icon: DocumentMagnifyingGlassIcon, current: false },
+  { name: 'Dashboard', href: route('frontend.dashboard'), icon: HomeIcon, current: true },
+  { name: 'Reports', href: route('frontend.tenantReports.index'), icon: DocumentIcon, current: false },
+  { name: 'Search', href: route('frontend.tenantReports.searchPage'), icon: DocumentMagnifyingGlassIcon, current: false },
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: route('profile.edit') },
+  { name: 'Your Profile', href: route('frontend.profile.edit') },
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: route('logout'), method: 'POST' },
 ]
@@ -91,7 +91,7 @@ const sidebarOpen = ref(false)
               {{ item.name }}
             </Link>
             <div class="pt-8">
-              <Link :href="route('tenantReports.create')" class="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create Report</Link>
+              <Link :href="route('frontend.tenantReports.create')" class="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create Report</Link>
             </div>
           </nav>
         </div>

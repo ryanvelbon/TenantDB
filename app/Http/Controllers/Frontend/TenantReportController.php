@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTenantReportRequest;
@@ -20,7 +20,7 @@ class TenantReportController extends Controller
         // $reports = TenantReport::where('created_by', Auth::id())->get();
         $reports = Auth::user()->reports;
 
-        return Inertia::render('TenantReport/Index', [
+        return Inertia::render('Frontend/TenantReport/Index', [
             'data' => [
                 'reports' => $reports,
             ],
@@ -29,7 +29,7 @@ class TenantReportController extends Controller
 
     public function create()
     {
-        return Inertia::render('TenantReport/Create', [
+        return Inertia::render('Frontend/TenantReport/Create', [
             'data' => [
                 'countries' => Country::all(),
             ],
@@ -54,12 +54,12 @@ class TenantReportController extends Controller
             'created_by' => $request->user()->id, 
         ]);
 
-        return redirect()->route('tenantReports.index');
+        return redirect()->route('frontend.tenantReports.index');
     }
 
     public function searchPage(Request $request)
     {
-        return Inertia::render('TenantReport/Search', [
+        return Inertia::render('Frontend/TenantReport/Search', [
             'data' => [
                 
             ],

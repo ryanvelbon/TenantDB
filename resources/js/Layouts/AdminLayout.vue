@@ -4,6 +4,7 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessu
 import { Link } from '@inertiajs/vue3'
 import {
   Bars3Icon,
+  BriefcaseIcon,
   CalendarIcon,
   ChartBarIcon,
   FolderIcon,
@@ -16,6 +17,7 @@ import {
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Permissions', href: route('admin.permissions.index'), icon: LockOpenIcon, current: false },
+  { name: 'Roles', href: route('admin.roles.index'), icon: BriefcaseIcon, current: false },
   { name: 'Users', href: route('admin.users.index'), icon: UsersIcon, current: false },
 ]
 const sidebarOpen = ref(false)

@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // Tenant Reports
+Route::get('/tenant-reports/search', [TenantReportController::class, 'searchPage'])->name('tenantReports.searchPage');
 Route::get('/tenant-reports/create', [TenantReportController::class, 'create'])->name('tenantReports.create');
 Route::post('/tenant-reports', [TenantReportController::class, 'store'])->name('tenantReports.store');
 Route::get('/tenant-reports', [TenantReportController::class, 'index'])->name('tenantReports.index');

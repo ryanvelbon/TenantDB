@@ -56,4 +56,13 @@ class TenantReportController extends Controller
 
         return redirect()->route('tenantReports.index');
     }
+
+    public function searchPage(Request $request)
+    {
+        return Inertia::render('TenantReport/Search', [
+            'data' => [
+                
+            ],
+        ]);
+    }
 }

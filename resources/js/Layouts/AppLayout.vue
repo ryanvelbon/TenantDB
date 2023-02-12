@@ -17,6 +17,7 @@ import {
   ChartBarIcon,
   DocumentIcon,
   HomeIcon,
+  DocumentMagnifyingGlassIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
@@ -24,6 +25,7 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 const navigation = [
   { name: 'Dashboard', href: route('dashboard'), icon: HomeIcon, current: true },
   { name: 'Reports', href: route('tenantReports.index'), icon: DocumentIcon, current: false },
+  { name: 'Search', href: route('tenantReports.searchPage'), icon: DocumentMagnifyingGlassIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: route('profile.edit') },

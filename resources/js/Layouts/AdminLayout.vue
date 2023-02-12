@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { Link } from '@inertiajs/vue3'
 import {
   Bars3Icon,
   CalendarIcon,
@@ -8,16 +9,14 @@ import {
   FolderIcon,
   HomeIcon,
   InboxIcon,
+  LockOpenIcon,
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  { name: 'Permissions', href: route('admin.permissions.index'), icon: LockOpenIcon, current: false },
+  { name: 'Users', href: route('admin.users.index'), icon: UsersIcon, current: false },
 ]
 const sidebarOpen = ref(false)
 </script>
@@ -53,10 +52,10 @@ const sidebarOpen = ref(false)
                   <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
                 </div>
                 <nav class="mt-5 space-y-1 px-2">
-                  <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
+                  <Link v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
                     <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
                     {{ item.name }}
-                  </a>
+                  </Link>
                 </nav>
               </div>
               <div class="flex flex-shrink-0 bg-gray-700 p-4">
@@ -90,10 +89,10 @@ const sidebarOpen = ref(false)
             <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
-            <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
+            <Link v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
               <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
               {{ item.name }}
-            </a>
+            </Link>
           </nav>
         </div>
         <div class="flex flex-shrink-0 bg-gray-700 p-4">

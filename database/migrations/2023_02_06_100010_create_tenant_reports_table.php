@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('phone');
+            $table->unsignedBigInteger('nationality')->nullable();
             $table->string('passport')->nullable();
             $table->string('id_card')->nullable();
             $table->date('dob');
@@ -21,8 +22,12 @@ return new class extends Migration
             $table->string('lease_broken');
             $table->decimal('outstanding_rent', 15, 2);
             $table->string('property_damaged');
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('nationality')->references('id')->on('countries');
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 

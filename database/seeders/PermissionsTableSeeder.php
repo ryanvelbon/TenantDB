@@ -76,22 +76,42 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 17,
-                'title' => 'tenant_report_create',
+                'title' => 'property_create',
             ],
             [
                 'id'    => 18,
-                'title' => 'tenant_report_edit',
+                'title' => 'property_edit',
             ],
             [
                 'id'    => 19,
-                'title' => 'tenant_report_show',
+                'title' => 'property_show',
             ],
             [
                 'id'    => 20,
-                'title' => 'tenant_report_delete',
+                'title' => 'property_delete',
             ],
             [
                 'id'    => 21,
+                'title' => 'property_access',
+            ],
+            [
+                'id'    => 22,
+                'title' => 'tenant_report_create',
+            ],
+            [
+                'id'    => 23,
+                'title' => 'tenant_report_edit',
+            ],
+            [
+                'id'    => 24,
+                'title' => 'tenant_report_show',
+            ],
+            [
+                'id'    => 25,
+                'title' => 'tenant_report_delete',
+            ],
+            [
+                'id'    => 26,
                 'title' => 'tenant_report_access',
             ],
             [

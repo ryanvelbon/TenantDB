@@ -24,6 +24,7 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 
 const navigation = [
   { name: 'Dashboard', href: route('frontend.dashboard'), icon: HomeIcon, current: true },
+  { name: 'Properties', href: route('frontend.properties.index'), icon: HomeIcon, current: false },
   { name: 'Reports', href: route('frontend.tenantReports.index'), icon: DocumentIcon, current: false },
   { name: 'Search', href: route('frontend.tenantReports.searchPage'), icon: DocumentMagnifyingGlassIcon, current: false },
 ]

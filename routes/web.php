@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\ProfileController;
+use App\Http\Controllers\Frontend\PropertyController;
 use App\Http\Controllers\Frontend\TenantReportController;
 
 use Illuminate\Foundation\Application;
@@ -42,6 +43,12 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend'], function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
+
+    // Properties
+    Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
+    Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
+    Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
+    Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
 
     // Tenant Reports
     Route::get('/tenant-reports/search', [TenantReportController::class, 'searchPage'])->name('tenantReports.searchPage');

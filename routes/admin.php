@@ -17,5 +17,6 @@ Route::group(['as' => 'admin.', 'namespace' => null, 'middleware' => []], functi
     Route::resource('roles', RoleController::class);
 
     // Users
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('users/destroy', [UserController::class, 'massDestroy'])->name('users.massDestroy');
+    Route::resource('users', UserController::class);
 });

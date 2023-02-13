@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::group(['as' => 'frontend.', 'namespace' => 'Frontend'], function () {
+Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['auth']], function () {
 
     // Dashboard
     Route::get('/dashboard', function () {
@@ -38,11 +38,9 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend'], function () {
     })->middleware(['auth', 'verified'])->name('dashboard');
 
     // Profile
-    Route::middleware('auth')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    });
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Properties
     Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');

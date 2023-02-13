@@ -17,8 +17,7 @@ class TenantReportController extends Controller
 {
     public function index()
     {
-        // $reports = TenantReport::where('created_by', Auth::id())->get();
-        $reports = Auth::user()->reports;
+        $reports = TenantReport::all();
 
         return Inertia::render('Frontend/TenantReport/Index', [
             'data' => [

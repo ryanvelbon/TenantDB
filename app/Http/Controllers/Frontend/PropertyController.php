@@ -18,7 +18,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $properties = Property::all(); // *PENDING* tenancy
+        $properties = Property::all();
 
         return Inertia::render('Frontend/Property/Index', [
             'data' => [

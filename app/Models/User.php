@@ -38,6 +38,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function properties()
+    {
+        return $this->hasMany(Property::class, 'created_by');
+    }
+
     public function reports()
     {
         return $this->hasMany(TenantReport::class, 'created_by');

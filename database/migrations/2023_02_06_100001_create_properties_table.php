@@ -15,8 +15,11 @@ return new class extends Migration
             $table->integer('size')->nullable();
             $table->integer('n_bedrooms')->nullable();
             $table->float('n_bathrooms', 2, 1)->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 

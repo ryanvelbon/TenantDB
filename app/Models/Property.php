@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use \DateTimeInterface;
+use App\Traits\MultiTenantModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ class Property extends Model
 {
     use SoftDeletes;
     use HasFactory;
+    use MultiTenantModelTrait;
 
     public const TYPE_SELECT = [
         [
@@ -75,10 +77,16 @@ class Property extends Model
         'size',
         'n_bedrooms',
         'n_bathrooms',
+        'created_by',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
     public function getTypeLabelAttribute()
     {

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -17,6 +19,7 @@ class PropertyFactory extends Factory
             'size' => rand(50,200),
             'n_bedrooms' => rand(1,4),
             'n_bathrooms' => rand(1,3),
+            'created_by' => User::inRandomOrder()->first()
         ];
     }
 }

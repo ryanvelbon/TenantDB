@@ -83,6 +83,11 @@ class Property extends Model
         'deleted_at',
     ];
 
+    public function path()
+    {
+        return "/properties/{$this->id}";
+    }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');

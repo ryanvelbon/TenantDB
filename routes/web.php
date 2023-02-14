@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['auth']], function () {
+Route::group(['as' => 'frontend.', 'namespace' => null, 'middleware' => ['auth']], function () {
 
     // Dashboard
     Route::get('/dashboard', function () {
@@ -43,13 +43,7 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Properties
-    Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
-    Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
-    Route::patch('/properties/{property}', [PropertyController::class, 'update'])->name('properties.update');
-    Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
-    Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('properties.edit');
-    Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
-    Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+    Route::resource('/properties', PropertyController::class);
 
     // Tenant Reports
     Route::get('/tenant-reports/search', [TenantReportController::class, 'searchPage'])->name('tenantReports.searchPage');

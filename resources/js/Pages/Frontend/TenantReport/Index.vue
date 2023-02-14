@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
-import { Link } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
   data: Object,

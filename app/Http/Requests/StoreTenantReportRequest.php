@@ -17,47 +17,6 @@ class StoreTenantReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstName' => [
-                'string',
-                'min:1',
-                'max:50',
-                'required',
-            ],
-            'lastName' => [
-                'string',
-                'min:1',
-                'max:50',
-                'required',
-            ],
-            'email' => [
-                'required',
-            ],
-            'phone' => [
-                'string',
-                'min:7',
-                'max:20',
-                'required',
-            ],
-            'nationality' => [
-                'required',
-                'integer',
-            ],
-            'passport' => [
-                'string',
-                'min:5',
-                'max:20',
-                'nullable',
-            ],
-            'id_card' => [
-                'string',
-                'min:6',
-                'max:20',
-                'nullable',
-            ],
-            'dob' => [
-                'required',
-                'date_format:' . config('panel.date_format'),
-            ],
             'nMonths' => [
                 'required',
                 'integer',

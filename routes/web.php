@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\PropertyController;
+use App\Http\Controllers\Frontend\TenantController;
 use App\Http\Controllers\Frontend\TenantReportController;
 
 use Illuminate\Foundation\Application;
@@ -44,6 +45,9 @@ Route::group(['as' => 'frontend.', 'namespace' => null, 'middleware' => ['auth']
 
     // Properties
     Route::resource('/properties', PropertyController::class);
+
+    // Tenants
+    Route::resource('/tenants', TenantController::class);
 
     // Tenant Reports
     Route::get('/tenant-reports/search', [TenantReportController::class, 'searchPage'])->name('tenantReports.searchPage');

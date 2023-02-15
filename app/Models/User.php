@@ -47,4 +47,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(TenantReport::class, 'created_by');
     }
+
+    /**
+     * assigns user with a role (without deleting already-existing roles)
+     * 
+     * @param  String  $title
+     * @return void
+     */
+    public function assignRole($title)
+    {
+        $this->roles()->syncWithoutDetaching(Role::where('title', $title)->first());
+    }
+
+    /**
+     * unassigns user a role
+     * 
+     * @param  String  $title
+     * @return void
+     */
+    public function removeRole($title)
+    {
+        $this->roles()->detach(Role::where('title', $title)->first());
+    }
 }

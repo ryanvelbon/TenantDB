@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
+import Pagination from '@/Components/Pagination.vue'
 import { Head } from '@inertiajs/vue3'
 
 const props = defineProps({
@@ -56,7 +57,7 @@ const props = defineProps({
         </div>
       </div>
       <div>
-          {{ tenants.data }}
+          <Pagination class="mt-6" :links="tenants.links" />
       </div>
     </div>
   </AppLayout>

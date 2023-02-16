@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -10,9 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 Route::group(['as' => 'admin.', 'namespace' => null, 'middleware' => ['auth', 'admin']], function () {
 
     // Dashboard
-    Route::get('dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->middleware(['verified'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->middleware(['verified'])->name('dashboard');
 
     // Permissions
     Route::delete('permissions/destroy', [PermissionController::class, 'massDestroy'])->name('permissions.massDestroy');

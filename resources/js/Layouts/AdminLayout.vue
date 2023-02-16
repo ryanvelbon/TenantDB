@@ -15,7 +15,7 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
+  { name: 'Dashboard', href: route('admin.dashboard'), icon: HomeIcon, current: true },
   { name: 'Permissions', href: route('admin.permissions.index'), icon: LockOpenIcon, current: false },
   { name: 'Roles', href: route('admin.roles.index'), icon: BriefcaseIcon, current: false },
   { name: 'Users', href: route('admin.users.index'), icon: UsersIcon, current: false },

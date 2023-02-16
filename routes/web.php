@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\PropertyController;
 use App\Http\Controllers\Frontend\TenantController;
@@ -34,9 +35,7 @@ require __DIR__.'/auth.php';
 Route::group(['as' => 'frontend.', 'namespace' => null, 'middleware' => ['auth']], function () {
 
     // Dashboard
-    Route::get('/dashboard', function () {
-        return Inertia::render('Frontend/Dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['verified'])->name('dashboard');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

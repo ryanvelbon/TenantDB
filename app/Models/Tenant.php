@@ -34,6 +34,7 @@ class Tenant extends Model
         'passport',
         'id_card',
         'dob',
+        'created_by',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 
-Route::group(['as' => 'admin.', 'namespace' => null, 'middleware' => ['auth']], function () {
+Route::group(['as' => 'admin.', 'namespace' => null, 'middleware' => ['auth', 'admin']], function () {
 
     // Dashboard
     Route::get('dashboard', function () {

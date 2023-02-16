@@ -47,7 +47,7 @@ const indeterminate = computed(() => selectedUsers.value.length > 0 && selectedU
                           <input type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6" :checked="indeterminate || selectedUsers.length === data.users.length" :indeterminate="indeterminate" @change="selectedUsers = $event.target.checked ? data.users.map((p) => p.email) : []" />
                         </th>
                         <th scope="col" class="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Role</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Roles</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Created at</th>
                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -65,7 +65,7 @@ const indeterminate = computed(() => selectedUsers.value.length > 0 && selectedU
                           {{ user.name }}
                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {{ user.role }}
+                          <span v-for="role in user.roles" class="bg-gray-200 rounded-lg px-3 py-1 ml-2 text-xs">{{ role.title }}</span>
                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {{ user.email }}

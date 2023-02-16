@@ -19,12 +19,23 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::with(['roles'])->get();
-
         return Inertia::render('Admin/User/Index', [
             'data' => [
-                'users' => $users
-            ],
+                'can' => [
+                    'create_user' => auth()->user()->can('create', User::class),
+                ],
+                'users' => User::all()->map(function ($user) {
+                    return [
+                        'name'       => $user->name,
+                        'email'      => $user->email,
+                        'created_at' => $user->created_at,
+                        'roles'      => $user->roles,
+                        'can' => [
+                            'edit_user' => auth()->user()->can('edit', $user),
+                        ]
+                    ];
+                }),
+            ]
         ]);
     }
 

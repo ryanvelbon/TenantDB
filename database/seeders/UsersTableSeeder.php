@@ -25,7 +25,5 @@ class UsersTableSeeder extends Seeder
             'password'       => bcrypt('password'),
             'remember_token' => null,
         ])->assignRole('admin');
-
-        User::factory(10)->create();
     }
 }

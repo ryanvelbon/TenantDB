@@ -135,6 +135,26 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'tenant_report_access',
             ],
             [
+                'id'    => 32,
+                'title' => 'contract_create',
+            ],
+            [
+                'id'    => 33,
+                'title' => 'contract_edit',
+            ],
+            [
+                'id'    => 34,
+                'title' => 'contract_show',
+            ],
+            [
+                'id'    => 35,
+                'title' => 'contract_delete',
+            ],
+            [
+                'id'    => 36,
+                'title' => 'contract_access',
+            ],
+            [
                 'id'    => 99,
                 'title' => 'profile_password_edit',
             ],

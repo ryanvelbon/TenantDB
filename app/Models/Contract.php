@@ -11,6 +11,18 @@ class Contract extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'start_date',
+        'end_date',
+        'rent',
+        'deposit',
+        'tenant_id',
+        'property_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);

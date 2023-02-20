@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->date('start_date');
             $table->date('end_date');
-            $table->decimal('rent', 15, 2);
-            $table->decimal('deposit', 15, 2);
+            $table->decimal('rent', 15, 0);
+            $table->decimal('deposit', 15, 0);
             $table->unsignedBigInteger('tenant_id');
             // $table->unsignedBigInteger('landlord_id');
             $table->unsignedBigInteger('property_id');

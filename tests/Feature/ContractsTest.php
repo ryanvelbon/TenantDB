@@ -69,4 +69,18 @@ class ContractsTest extends TestCase
                 ->where('contracts.data.0.rent', '2500')
             );
     }
+
+    public function test_can_filter_to_view_deleted_contracts()
+    {
+        $this->user->contracts->get(0)->delete();
+
+        $this->actingAs($this->user)
+            ->get('/contracts?trashed=with')
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('Frontend/Contract/Index')
+                ->has('contracts.data', 2)
+                ->where('contracts.data.0.rent', '1000')
+                ->where('contracts.data.1.rent', '2500')
+            );
+    }
 }

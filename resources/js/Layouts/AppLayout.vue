@@ -22,6 +22,7 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
+import FlashMessages from '@/Components/FlashMessages.vue'
 
 const navigation = [
   { name: 'Dashboard', href: route('frontend.dashboard'), icon: HomeIcon, current: true },
@@ -145,6 +146,7 @@ const sidebarOpen = ref(false)
       </div>
 
       <main>
+        <FlashMessages />
         <div class="py-6">
           <slot />
           <!--

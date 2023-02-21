@@ -13,7 +13,7 @@ class TenantController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('tenant_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('tenant_access'), Inertia::render('Error/403', ['message' => 'You are not authorized to access this resource.'], 403));
 
         return Inertia::render('Frontend/Tenant/Index', [
             'tenants' => auth()->user()->tenants()
@@ -26,6 +26,7 @@ class TenantController extends Controller
                     'lastName'    => $tenant->last_name,
                     'email'       => $tenant->email,
                     'phone'       => $tenant->phone,
+                    'idCard'      => $tenant->id_card,
                     'nationality' => $tenant->nationality,
                     'passport'    => $tenant->passport,
                 ]),

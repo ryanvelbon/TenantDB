@@ -17,19 +17,19 @@ class StoreContractRequest extends FormRequest
     public function rules()
     {
         return [
-            'start_date' => [
+            'startDate' => [
                 'required',
                 'date_format:' . config('panel.date_format'),
             ],
-            'end_date' => [
+            'endDate' => [
                 'required',
                 'date_format:' . config('panel.date_format'),
             ],
-            'tenant_id' => [
+            'tenant' => [
                 'required',
                 'integer',
             ],
-            'property_id' => [
+            'property' => [
                 'required',
                 'integer',
             ],

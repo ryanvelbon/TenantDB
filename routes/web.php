@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\PropertyController;
 use App\Http\Controllers\Frontend\TenantController;
 use App\Http\Controllers\Frontend\TenantReportController;
+use App\Http\Controllers\Frontend\ContractController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -53,4 +54,7 @@ Route::group(['as' => 'frontend.', 'namespace' => null, 'middleware' => ['auth']
     Route::get('/tenant-reports/create', [TenantReportController::class, 'create'])->name('tenantReports.create');
     Route::post('/tenant-reports', [TenantReportController::class, 'store'])->name('tenantReports.store');
     Route::get('/tenant-reports', [TenantReportController::class, 'index'])->name('tenantReports.index');
+
+    // Contracts
+    Route::resource('/contracts', ContractController::class);
 });

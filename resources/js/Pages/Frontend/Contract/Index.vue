@@ -20,9 +20,7 @@ const props = defineProps({
           <th>Tenant</th>
           <th>Rent</th>
           <th>Deposit</th>
-          <th>
-            <span>Edit</span>
-          </th>
+          <th>edit</th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +31,7 @@ const props = defineProps({
           <td class="px-4">{{ contract.rent }} / month</td>
           <td class="px-4">{{ contract.deposit }}</td>
           <td>
-            <a href="#">Edit</a>
+            <Link :href="`/contracts/${contract.id}/edit`">edit</Link>
           </td>
         </tr>
       </tbody>

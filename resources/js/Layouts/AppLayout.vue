@@ -17,6 +17,7 @@ import {
   ChartBarIcon,
   DocumentIcon,
   DocumentMagnifyingGlassIcon,
+  DocumentTextIcon,
   HomeIcon,
   UserGroupIcon,
   XMarkIcon,
@@ -26,6 +27,7 @@ import FlashMessages from '@/Components/FlashMessages.vue'
 
 const navigation = [
   { name: 'Dashboard', href: route('frontend.dashboard'), icon: HomeIcon, current: true },
+  { name: 'Contracts', href: route('frontend.contracts.index'), icon: DocumentTextIcon, current: false },
   { name: 'Properties', href: route('frontend.properties.index'), icon: HomeIcon, current: false },
   { name: 'Tenants', href: route('frontend.tenants.index'), icon: UserGroupIcon, current: false },
   { name: 'Reports', href: route('frontend.tenantReports.index'), icon: DocumentIcon, current: false },

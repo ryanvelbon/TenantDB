@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('tenant_reports', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tenant_id');
             $table->integer('n_months');
             $table->string('lease_broken');
             $table->decimal('outstanding_rent', 15, 2);
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->foreign('created_by')->references('id')->on('users');
         });
     }

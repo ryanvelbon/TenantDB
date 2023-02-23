@@ -17,6 +17,10 @@ class StoreTenantReportRequest extends FormRequest
     public function rules()
     {
         return [
+            'tenant' => [
+                'required',
+                'integer',
+            ],
             'nMonths' => [
                 'required',
                 'integer',

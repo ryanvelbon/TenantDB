@@ -17,12 +17,10 @@ class TenantReportController extends Controller
 {
     public function index()
     {
-        $reports = TenantReport::all();
+        $reports = TenantReport::all()->load('tenant');
 
         return Inertia::render('Frontend/TenantReport/Index', [
-            'data' => [
-                'reports' => $reports,
-            ],
+            'reports' => $reports,
         ]);
     }
 
@@ -40,6 +38,7 @@ class TenantReportController extends Controller
     public function store(StoreTenantReportRequest $request)
     {
         TenantReport::create([
+            'tenant_id' => $request->input('tenant'),
             'n_months' => $request->input('nMonths'),
             'lease_broken' => $request->input('leaseBroken'),
             'outstanding_rent' => $request->input('outstandingRent'),

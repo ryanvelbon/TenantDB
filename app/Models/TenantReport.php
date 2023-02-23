@@ -35,6 +35,7 @@ class TenantReport extends Model
     ];
 
     protected $fillable = [
+        'tenant_id',
         'n_months',
         'lease_broken',
         'outstanding_rent',
@@ -48,6 +49,11 @@ class TenantReport extends Model
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

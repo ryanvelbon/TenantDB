@@ -3,7 +3,7 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
-  data: Object,
+  reports: Object,
 })
 
 </script>
@@ -30,24 +30,27 @@ const props = defineProps({
                     <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Report ID</th>
                     <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
                     <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
-                    <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
                     <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Passport</th>
-                    <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">National ID</th>
-                    <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">DOB</th>
+                    <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">months</th>
+                    <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">lease broken</th>
+                    <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">outstanding</th>
+                    <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">damage</th>
+
                     <th scope="col" class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6">
                       <span class="sr-only">Edit</span>
                     </th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                  <tr v-for="report in data.reports" :key="report.id">
+                  <tr v-for="report in reports" :key="report.id">
                     <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">{{ report.id }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ report.first_name }} {{ report.last_name }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ report.email }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ report.phone }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ report.passport }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ report.id_card }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ report.dob }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ report.tenant.first_name }} {{ report.tenant.last_name }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ report.tenant.email }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ report.tenant.passport }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ report.n_months }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ report.lease_broken }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ report.outstanding_rent }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ report.property_damaged }}</td>
                     <td class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                       <a href="#" class="text-indigo-600 hover:text-indigo-900"
                         >Edit<span class="sr-only">, {{ report.id }}</span></a

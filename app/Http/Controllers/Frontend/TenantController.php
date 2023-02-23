@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTenantRequest;
+use App\Models\Country;
 use App\Models\Tenant;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
 use Inertia\Inertia;
 
@@ -31,5 +34,30 @@ class TenantController extends Controller
                     'passport'    => $tenant->passport,
                 ]),
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Frontend/Tenant/Create', [
+            'countries' => Country::all()
+                    ->map
+                    ->only('id', 'nicename'),
+        ]);
+    }
+
+    public function store(StoreTenantRequest $request)
+    {
+        auth()->user()->tenants()->create([
+            'first_name' => $request->input('firstName'),
+            'last_name' => $request->input('lastName'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'nationality' => $request->input('nationality'),
+            'passport' => $request->input('passport'),
+            'id_card' => $request->input('idCard'),
+            'dob' => $request->input('dob'),
+        ]);
+
+        return Redirect::route('frontend.tenants.index')->with('success', 'Tenant created.');
     }
 }

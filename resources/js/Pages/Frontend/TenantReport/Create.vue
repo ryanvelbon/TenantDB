@@ -8,26 +8,18 @@ import DropdownA from '@/Components/DropdownA.vue'
 import { Head, useForm } from '@inertiajs/vue3'
 
 const props = defineProps({
-  data: Object,
-  meta: Object,
+  tenants: Object,
 })
 
-const countries = props.data.countries.map(function(obj) {
+const tenants = props.tenants.map(function(obj) {
   return {
-    label: obj.nicename,
+    label: obj.first_name + ' ' + obj.last_name,
     value: obj.id,
   }
 })
 
 const form = useForm({
-  firstName: '',
-  lastName: '',
-  email: '',
-  phone: '',
-  nationality: '',
-  passport: '',
-  idCard: '',
-  dob: '',
+  tenant: '',
   nMonths: '',
   leaseBroken: '',
   outstandingRent: '',
@@ -47,110 +39,20 @@ const submit = () => {
     <Head title="File a report" />
 
     <form @submit.prevent="submit" autocomplete="off">
-      <section class="bg-yellow-200 p-8">
-        <div class="grid sm:grid-cols-2 gap-y-6">
-
-          <div>
-            <InputLabel for="firstName" value="First Name" />
-            <TextInput
-              id="firstName"
-              type="text"
-              v-model="form.firstName"
-              class="mt-1 block"
-              required
-              autofocus
-            />
-            <InputError class="mt-2" :message="form.errors.firstName" />
-          </div>
-
-          <div>
-            <InputLabel for="lastName" value="Last Name" />
-            <TextInput
-              id="lastName"
-              type="text"
-              v-model="form.lastName"
-              class="mt-1 block"
-              required
-            />
-            <InputError class="mt-2" :message="form.errors.lastName" />
-          </div>
-
-          <div>
-            <InputLabel for="email" value="Email" />
-            <TextInput
-              id="email"
-              type="email"
-              v-model="form.email"
-              class="mt-1 block"
-              required
-            />
-            <InputError class="mt-2" :message="form.errors.email" />
-          </div>
-
-          <div>
-            <InputLabel for="phone" value="Phone" />
-            <TextInput
-              id="phone"
-              type="text"
-              v-model="form.phone"
-              class="mt-1 block"
-              required
-            />
-            <InputError class="mt-2" :message="form.errors.phone" />
-          </div>
-
-          <div>
-            <InputLabel for="nationality" value="Nationality" />
-            <DropdownA
-              id="nationality"
-              :items="countries"
-              v-model="form.nationality"
-              class="mt-1 block"
-              required
-            />
-            <InputError class="mt-2" :message="form.errors.nationality" />
-          </div>
-
-          <div>
-            <InputLabel for="passport" value="Passport Number" />
-            <TextInput
-              id="passport"
-              type="text"
-              v-model="form.passport"
-              class="mt-1 block"
-              required
-            />
-            <InputError class="mt-2" :message="form.errors.passport" />
-          </div>
-
-          <div>
-            <InputLabel for="idCard" value="National ID" />
-            <TextInput
-              id="idCard"
-              type="text"
-              v-model="form.idCard"
-              class="mt-1 block"
-              required
-            />
-            <InputError class="mt-2" :message="form.errors.idCard" />
-          </div>
-
-          <div>
-            <InputLabel for="dob" value="Date of Birth" />
-            <TextInput
-              id="dob"
-              type="date"
-              v-model="form.dob"
-              class="mt-1 block"
-              required
-            />
-            <InputError class="mt-2" :message="form.errors.dob" />
-          </div>
-
-        </div>
-      </section>
       <section class="bg-blue-200 p-8">
         <div class="grid sm:grid-cols-2 gap-y-6">
+
+          <div>
+            <InputLabel for="tenant" value="Tenant" />
+            <DropdownA
+              id="tenant"
+              :items="tenants"
+              v-model="form.tenant"
+              class="mt-1 block"
+              required
+            />
+            <InputError class="mt-2" :message="form.errors.tenant" />
+          </div>
 
           <div>
             <InputLabel for="nMonths" value="n months" />

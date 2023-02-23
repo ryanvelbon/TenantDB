@@ -17,13 +17,13 @@ class StoreTenantRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => [
+            'firstName' => [
                 'string',
                 'min:1',
                 'max:50',
                 'required',
             ],
-            'last_name' => [
+            'lastName' => [
                 'string',
                 'min:1',
                 'max:50',
@@ -38,7 +38,7 @@ class StoreTenantRequest extends FormRequest
                 'max:20',
                 'required',
             ],
-            'nationality_id' => [
+            'nationality' => [
                 'required',
                 'integer',
             ],
@@ -48,7 +48,7 @@ class StoreTenantRequest extends FormRequest
                 'max:20',
                 'nullable',
             ],
-            'id_card' => [
+            'idCard' => [
                 'string',
                 'min:6',
                 'max:20',

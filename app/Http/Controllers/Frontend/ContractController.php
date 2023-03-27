@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MassDestroyContractRequest;
 use App\Http\Requests\StoreContractRequest;
 use App\Http\Requests\UpdateContractRequest;
 use App\Models\Contract;
@@ -107,5 +108,19 @@ class ContractController extends Controller
         $contract->delete();
 
         return Redirect::route('frontend.contracts.index')->with('success', 'Contract deleted.');
+    }
+
+    public function massDestroy(MassDestroyContractRequest $request)
+    {
+        Contract::whereIn('id', request('ids'))->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function restore(Contract $contract)
+    {
+        $contract->restore();
+
+        return Redirect::route('frontend.contracts.index')->with('success', 'Contract restored.');
     }
 }

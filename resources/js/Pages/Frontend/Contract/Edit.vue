@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import { Head, useForm } from '@inertiajs/vue3'
+import TrashedMessage from '@/Components/TrashedMessage.vue'
 
 const props = defineProps({
     contract: Object,
@@ -33,10 +34,17 @@ const destroy = () => {
     }
 }
 
+const restore = () => {
+    if (confirm('Are you sure you want to restore this contract?')) {
+        form.put(`/contracts/${props.contract.id}/restore`)
+    }
+}
+
 </script>
 
 <template>
     <AppLayout>
+        <TrashedMessage v-if="contract.deletedAt" class="mb-6" @restore="restore"> This contract has been deleted. </TrashedMessage>
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl">
                 <Head title="Create a Contract" />
@@ -98,8 +106,11 @@ const destroy = () => {
                     </div>
 
                     <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100 mt-4">
-                        <PrimaryButton v-if="!contract.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">
+                        <PrimaryButton v-if="!contract.deletedAt" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">
                             Delete
+                        </PrimaryButton>
+                        <PrimaryButton v-else @click="restore">
+                            Restore
                         </PrimaryButton>
                         <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                             Update

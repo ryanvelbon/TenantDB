@@ -56,5 +56,7 @@ Route::group(['as' => 'frontend.', 'namespace' => null, 'middleware' => ['auth']
     Route::get('/tenant-reports', [TenantReportController::class, 'index'])->name('tenantReports.index');
 
     // Contracts
+    Route::delete('/contracts/destroy', [ContractController::class, 'massDestroy'])->name('contracts.massDestroy');
+    Route::put('/contracts/{contract}/restore', [ContractController::class, 'restore'])->name('contracts.restore');
     Route::resource('/contracts', ContractController::class);
 });

@@ -46,9 +46,9 @@ const props = defineProps({
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ tenant.email }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ tenant.passport }}</td>
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-6 text-right text-sm font-medium sm:pr-3">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                      >Edit<span class="sr-only">, {{ tenant.firstName }}</span></a
-                    >
+                    <Link :href="route('frontend.tenants.edit', tenant.id)" class="text-indigo-600 hover:text-indigo-900">
+                      Edit<span class="sr-only">, {{ tenant.firstName }}</span>
+                    </Link>
                   </td>
                 </tr>
               </tbody>

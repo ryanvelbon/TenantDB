@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTenantRequest;
+use App\Http\Requests\UpdateTenantRequest;
 use App\Models\Country;
 use App\Models\Tenant;
 use Gate;
@@ -59,5 +60,51 @@ class TenantController extends Controller
         ]);
 
         return Redirect::route('frontend.tenants.index')->with('success', 'Tenant created.');
+    }
+
+    public function edit(Tenant $tenant)
+    {
+        return Inertia::render('Frontend/Tenant/Edit', [
+            'tenant' => [
+                'id' => $tenant->id,
+                'firstName' => $tenant->first_name,
+                'lastName' => $tenant->last_name,
+                'email' => $tenant->email,
+                'phone' => $tenant->phone,
+                'nationality' => $tenant->nationality,
+                'passport' => $tenant->passport,
+                'idCard' => $tenant->id_card,
+                'dob' => $tenant->dob,
+                'deletedAt' => $tenant->deleted_at,
+            ],
+            'countries' => Country::all()
+                ->map
+                ->only('id', 'nicename'),
+        ]);
+    }
+
+    public function update(UpdateTenantRequest $request, Tenant $tenant)
+    {
+        $tenant->update([
+            'first_name' => $request->input('firstName'),
+            'last_name' => $request->input('lastName'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'nationality' => $request->input('nationality'),
+            'passport' => $request->input('passport'),
+            'id_card' => $request->input('idCard'),
+            'dob' => $request->input('dob'),
+        ]);
+
+        return Redirect::route('frontend.tenants.index')->with('success', 'Tenant updated.');
+    }
+
+    public function destroy(Tenant $tenant)
+    {
+        abort_if(Gate::denies('tenant_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $tenant->delete();
+
+        return redirect()->route('frontend.tenants.index');
     }
 }

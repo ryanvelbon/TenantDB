@@ -10,41 +10,21 @@ class RolesTableSeeder extends Seeder
 {
     public function run()
     {
-
-        /*
-        |--------------------------------------------------------------------------
-        | Admin
-        |--------------------------------------------------------------------------
-        |
-        | Lorem ipsum dolor sit amet
-        |
-        */
+        // ++++ Admin ++++
 
         $role = Role::create(['id' => 1, 'title' => 'Admin']);
         $permissions = Permission::all();
         $role->permissions()->sync($permissions->pluck('id'));
 
-        /*
-        |--------------------------------------------------------------------------
-        | User
-        |--------------------------------------------------------------------------
-        |
-        | Lorem ipsum dolor sit amet
-        |
-        */
+
+        // ++++ User ++++
 
         $role = Role::create(['id' => 2, 'title' => 'User']);
         $permissions = Permission::all()->reject(function ($permission) {return preg_match('/^(user|role|permission|team)_/', $permission->title); });
         $role->permissions()->sync($permissions);
 
-        /*
-        |--------------------------------------------------------------------------
-        | Landlord
-        |--------------------------------------------------------------------------
-        |
-        | Lorem ipsum dolor sit amet
-        |
-        */
+
+        // ++++ Landlord ++++
 
         Role::create(['id' => 3, 'title' => 'Landlord'])
             ->attachPermissions([
@@ -64,5 +44,17 @@ class RolesTableSeeder extends Seeder
                 'tenant_report_delete',
                 'tenant_report_access',
         ]);
+
+
+        // ++++ Agent ++++
+
+        Role::create(['id' => 4, 'title' => 'Agent'])
+            ->attachPermissions([]);
+
+
+        // ++++ Tenant ++++
+
+        Role::create(['id' => 5, 'title' => 'Tenant'])
+            ->attachPermissions([]);
     }
 }

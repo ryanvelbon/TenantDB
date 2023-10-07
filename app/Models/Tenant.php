@@ -56,6 +56,11 @@ class Tenant extends Model
         return $this->belongsTo(Country::class, 'nationality');
     }
 
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class);
+    }
+
     public function reports(): HasMany
     {
         return $this->hasMany(TenantReport::class);

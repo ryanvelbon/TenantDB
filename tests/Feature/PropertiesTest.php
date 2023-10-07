@@ -48,11 +48,7 @@ class PropertiesTest extends TestCase
         $userB = User::factory()->create();
         $property = Property::factory()->create(['created_by' => $userB->id]);
 
-        print($userA);
-        print($userB);
-        print($property);
-
         $response = $this->actingAs($userA)->get($property->path());
-        $response->assertStatus(404);
+        $response->assertStatus(403);
     }
 }

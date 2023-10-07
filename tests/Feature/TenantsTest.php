@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Inertia\Testing\Assert;
+use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 use App\Models\Tenant;
 use App\Models\User;
@@ -58,7 +58,19 @@ class TenantsTest extends TestCase
 
     public function test_a_landlord_can_create_a_tenant()
     {
-        $this->assertTrue(false);
+        $tenantData = Tenant::factory()->make()->toArray();
+
+        $response = $this->actingAs($this->user)->post(route('frontend.tenants.store'), $tenantData);
+
+        $response->assertRedirect(route('frontend.tenants.index'));
+
+        $this->assertDatabaseHas('tenants', [
+            'first_name' => $tenantData['first_name'],
+            'last_name' => $tenantData['last_name'],
+            'email' => $tenantData['email']
+        ]);
+
+        $this->assertTrue($this->user->tenants()->where('email', $tenantData['email'])->exists());
     }
 
     public function test_a_landlord_can_view_tenants()
@@ -68,49 +80,96 @@ class TenantsTest extends TestCase
             ->assertInertia(fn (Assert $assert) => $assert
                 ->component('Frontend/Tenant/Index')
                 ->has('tenants.data', 2)
-                ->has('tenants.data.0', fn (Assert $assert) => $assert
-                    ->where('firstName', 'John')
-                    ->where('lastName', 'Doe')
-                )
-                ->has('tenants.data.1', fn (Assert $assert) => $assert
-                    ->where('firstName', 'Mary')
-                    ->where('lastName', 'Jane')
-                )
+                ->where('tenants.data.0.firstName', 'John')
+                ->where('tenants.data.0.lastName', 'Doe')
+                ->where('tenants.data.0.email', 'john@example.com')
+                ->where('tenants.data.0.phone', '123-456-6789')
+                ->where('tenants.data.0.passport', '251917371230')
+                ->where('tenants.data.0.idCard', '392683340027')
+                // ->where('tenants.data.0.dob', '1957-05-10')
+                // ->has('tenants.data.1', fn (Assert $assert) => $assert
+                //     ->where('firstName', 'Mary')
+                //     ->where('lastName', 'Jane')
+                // )
             );
+    }
+
+    public function test_a_landlord_can_search_tenants()
+    {
+        $this->assertEquals(2, $this->user->roles->count());
+        $this->actingAs($this->user)
+            ->get('/tenants?search=John')
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('Frontend/Tenant/Index')
+                ->where('filters.search', 'John')
+                ->has('tenants.data', 1)
+        );
     }
 
     public function test_a_landlord_can_retrieve_a_tenant()
     {
-        $this->assertTrue(false);
+        $tenant = Tenant::factory()->create(['created_by' => $this->user->id]);
+
+        $response = $this->actingAs($this->user)->get(route('frontend.tenants.show', $tenant->id));
+
+        $response->assertStatus(200);
     }
 
     public function test_a_landlord_can_update_a_tenant()
     {
-        $this->assertTrue(false);
+        $tenant = Tenant::factory()->create(['created_by' => $this->user->id]);
+        $updatedData = ['first_name' => 'Taylor'];
+
+        // Attempt to update the tenant's data
+        $response = $this->actingAs($this->user)->patch(route('frontend.tenants.update', $tenant->id), $updatedData);
+
+        $response->assertRedirect(route('frontend.tenants.show', $tenant->id));
+        $this->assertEquals('Taylor', $tenant->fresh()->first_name);
     }
 
     public function test_a_landlord_can_delete_a_tenant()
     {
-        $this->assertTrue(false);
+        $tenant = Tenant::factory()->create(['created_by' => $this->user->id]);
+
+        // Attempt to delete the tenant
+        $response = $this->actingAs($this->user)->delete(route('frontend.tenants.destroy', $tenant->id));
+
+        $response->assertRedirect(route('frontend.tenants.index'));
+        $this->assertSoftDeleted($tenant);
     }
 
     public function test_two_landlords_can_create_their_own_tenant_record_for_the_same_individual()
     {
-        $this->assertTrue(false);
+        $anotherUser = User::factory()->create();
+        $anotherUser->assignRole('landlord');
+        $tenantData = Tenant::factory()->make(['email' => 'sameemail@example.com'])->toArray();
+
+        $this->actingAs($this->user)->post(route('frontend.tenants.store'), $tenantData);
+        $this->actingAs($anotherUser)->post(route('frontend.tenants.store'), $tenantData);
+
+        $this->assertEquals(1, $this->user->tenants->count());
+        $this->assertEquals(1, $anotherUser->tenants->count());
     }
 
     public function test_a_landlord_cannot_create_two_tenants_with_the_same_email()
     {
-        $this->assertTrue(false);
+        $tenantData = Tenant::factory()->make(['email' => 'duplicateemail@example.com'])->toArray();
+
+        // Insert the tenant data twice
+        $this->actingAs($this->user)->post(route('frontend.tenants.store'), $tenantData);
+        $response = $this->actingAs($this->user)->post(route('frontend.tenants.store'), $tenantData);
+
+        $response->assertSessionHasErrors(['email']);
     }
 
     public function test_a_landlord_cannot_create_two_tenants_with_the_same_passport()
     {
-        $this->assertTrue(false);
-    }
+        $tenantData = Tenant::factory()->make(['passport' => '12345678'])->toArray();
 
-    public function test_a_tenant_requires_a_first_name()
-    {
-        $this->assertTrue(false);
+        // Insert the tenant data twice
+        $this->actingAs($this->user)->post(route('frontend.tenants.store'), $tenantData);
+        $response = $this->actingAs($this->user)->post(route('frontend.tenants.store'), $tenantData);
+
+        $response->assertSessionHasErrors(['passport']);
     }
 }

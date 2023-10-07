@@ -4,7 +4,6 @@ namespace Tests\Unit;
 
 use App\Models\Tenant;
 use App\Models\User;
-
 use Tests\TestCase;
 
 class TenantTest extends TestCase

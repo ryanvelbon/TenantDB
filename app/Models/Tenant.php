@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Traits\MultiTenantModelTrait;
 
@@ -53,6 +54,11 @@ class Tenant extends Model
     public function nationality()
     {
         return $this->belongsTo(Country::class, 'nationality');
+    }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(TenantReport::class);
     }
 
     public function getDobAttribute($value)

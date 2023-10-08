@@ -37,6 +37,15 @@ class TenantController extends Controller
         ]);
     }
 
+    public function show(Tenant $tenant)
+    {
+        abort_if(Gate::denies('tenant_show'), Inertia::render('Error/403', ['message' => 'You are not authorized to access this resource.'], 403));
+
+        return Inertia::render('Frontend/Tenant/Show', [
+            'tenant' => $tenant,
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render('Frontend/Tenant/Create', [

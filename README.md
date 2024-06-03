@@ -1,61 +1,51 @@
-# RENTdee
+# TenantDB
 
-RentDee is a tenant reporting database, built for landlords. We aim to make your renting decisions easier by helping you pick the best tenants.
-
-## Topics
+TenantDB helps landlords and property managers pick the best tenants and avoid rental disasters.
 
 1. [Features](#features)
-1. [Database](#database)
-1. [Running the tests](#running-the-tests)
-1. [Deployment](#deployment)
-1.
-1. [Conventions](#conventions)
+1. [Install](#install)
+1. [Test](#test)
 
-## Features
+Features
+========
 
-### Admin
+Admin Panel
+-----------
 - dashboard
-  - view stats
-    - number of sign ups
-    - number of report runs
-- search a User
-- search a tenant report by passport, phone, or email
-- edit a User
+- manage users
+- manage tenant reports
 
-### Frontend
+Customer-Facing App
+-------------------
 - report a tenant
 - search a tenant
-- localization (using i18n package)
+- tenant screening and background check
 
+Install
+=======
 
-## Database
-- User
-  - end-users (landlord, agent, tenant)
-  - admin users (admin)
-- Role
-- Permission
-- Property
-- Tenant
-- TenantReport
+    $ composer install
 
-## Stack
+    $ npm install && npm run dev
 
-RentDee is a SPA built with Laravel + Vue (using Inertia client-side rendering)
+Test
+====
 
-Why client-side rendering? SEO not important. Note that even though we are not using server-side rendering, we are still using server-side routing with Ziggy package.
+Run the tests
 
-## Installation
+    $ php artisan test
 
-### Running the tests
+You cannot use SQLite for running the tests because the database is partially seeded using MySQL scripts. Therefore, you will need to set up a MySQL test database before running any tests.
 
-Set up a testing environment
+Create a `.env.testing` file
 
     $ cp .env.example .env.testing
 
     APP_ENV=testing
-     
-    DB_CONNECTION=
-    DATABASE=
+
+Configure `DB_CONNECTION` and `DATABASE`.
+
+    $ php artisan config:clear
 
 Switch to test environment
 
@@ -64,24 +54,3 @@ Switch to test environment
 to switch back to local environment
 
     $ php artisan config:cache --env=local
-
-Run the tests
-
-    $ php artisan test
-
-    $ php artisan test --filter
-
-
-## Notes for developers
-
-### Create reusable Vue components
-
-Create reusable custom Vue components in `resources/js/Components` so that you will have a consistent UI.
-
-### OOP Inheritance & extension tables
-
-Extension tables should follow the naming convention `goos__foo` where `class Foo extends Goo`.
-
-### Comments tags
-
-You will come across comments containing the following tags such as `*PENDING*`, `*TEMP*`, `*FIX*`, `*REFACTOR*`, `*OPT*`, `*REVISE*`; these indicate that the code needs to be revised.

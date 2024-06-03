@@ -32,7 +32,7 @@ defineProps({
     </div>
 
     <div class="container bg-green-200 pt-4 pb-4 px-8">
-      <a href="" class="text-2xl font-bold">RENTdee</a>
+      <a href="" class="text-2xl font-bold">TenantDB</a>
     </div>
 
     <div class="relative bg-gray-800">
